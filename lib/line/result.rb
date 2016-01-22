@@ -1,20 +1,21 @@
 module Line
   class Result
 
-    attr_accessor :from, :contentType
+    attr_accessor :from, :contentType, :id
 
-    def initialize(contentType, from)
+    def initialize(contentType, id, from)
       @from = from
-      @contentType = contentType      
+      @contentType = contentType
+      @id = id      
     end
 
     def self.from_hash(hash)
       content = hash['content']
       result = nil
       if content['contentType'].to_i == TEXT_MESSAGE
-        result = Text.new(content['from'], content['text'])
+        result = Text.new(content['from'], content['id'], content['text'])
       elsif content['contentType'].to_i == IMAGE_MESSAGE
-        result = Image.new(content['from'], content['originalContentUrl'], content['previewImageUrl'])
+        result = Image.new(content['from'], content['id'], content['originalContentUrl'], content['previewImageUrl'])
       end
 
       result
@@ -33,8 +34,8 @@ module Line
 
     attr_accessor :text
 
-    def initialize(from, text)
-      super(Result::TEXT_MESSAGE, from)
+    def initialize(from, id, text)
+      super(Result::TEXT_MESSAGE, id, from)
       @text = text
     end
 
@@ -44,8 +45,8 @@ module Line
 
     attr_accessor :url, :preview
 
-    def initalize(from, originalContentUrl, previewImageUrl)
-      super(Result::IMAGE_MESSAGE, from)
+    def initalize(from, id, originalContentUrl, previewImageUrl)
+      super(Result::IMAGE_MESSAGE, id, from)
       @url = originalContentUrl
       @preview = previewImageUrl 
     end
