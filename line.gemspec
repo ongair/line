@@ -13,5 +13,5 @@ Gem::Specification.new do |s|
   s.description = 'API, command and message handling for LINE'
 
   s.files = Dir['{bin,lib}/**/*'] + %w(LICENSE Rakefile README.md README-CN.md CHANGELOG.md)
-  s.executables << 'wechat'
+  s.executables << 'line'
 end
