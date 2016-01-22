@@ -1,0 +1,17 @@
+PATH
+  remote: .
+  specs:
+    line (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  line!
+
+BUNDLED WITH
+   1.10.5
