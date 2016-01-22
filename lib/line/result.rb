@@ -11,7 +11,7 @@ module Line
     def self.from_hash(hash)
       content = hash['content']
       result = nil
-      if content['contentType'] == 1
+      if content['contentType'].to_i == 1
         result = Text.new(content['from'], content['text'])
       end
 
