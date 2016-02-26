@@ -1,6 +1,5 @@
 module Line
   class Result
-    require 'pry-byebug'
 
     #constants are always defined at the top of the class
     TEXT_MESSAGE = 1
@@ -33,9 +32,9 @@ module Line
       content = hash['content']
       result = nil
 
-      if MESSAGE_TYPE[content['contentType']] == 'Text'
+      if content['contentType'].to_i == TEXT_MESSAGE
         result = Text.new(content['from'], content['id'], content['text'])
-      elsif MESSAGE_TYPE[content['contentType']] == 'Image'
+      elsif content['contentType'].to_i == IMAGE_MESSAGE
         result = Image.new(content['from'], content['id'], content['originalContentUrl'], content['previewImageUrl'])
       end
       result
