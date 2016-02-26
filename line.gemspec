@@ -12,5 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = 'DSL for LINE message handling and API'
   s.description = 'API, command and message handling for LINE'
 
+  s.add_development_dependency "pry-byebug"
+
   s.files = Dir['{bin,lib}/**/*'] + %w(Rakefile README.md MIT-LICENSE)
 end

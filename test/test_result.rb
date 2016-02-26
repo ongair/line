@@ -10,5 +10,6 @@ class ResultTest < Test::Unit::TestCase
     assert_equal 'Wassup?', message.text
     assert_equal 'u225a0f79e5e35709d39a157ab78c8dea', message.from
     assert_equal '3788348968308', message.id
+    assert_equal 'Text', message.contentType
   end
 end
