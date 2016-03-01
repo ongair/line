@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.summary     = 'DSL for LINE message handling and API'
   s.description = 'API, command and message handling for LINE'
 
-  spec.add_dependency "httparty"
-  spec.add_dependency "httmultiparty"
+  s.add_dependency "httparty"
+  s.add_dependency "httmultiparty"
   s.add_development_dependency "webmock"
   s.add_development_dependency "pry-byebug"
 
