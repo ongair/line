@@ -3,7 +3,7 @@ require 'byebug'
 
 module Line
   class Client
-    #checks to see if the token is valid
+    # checks to see if the token is valid
     #
     # @params access_token [String] the access_token
     # [Boolean] true/false if valid or not
@@ -20,6 +20,12 @@ module Line
       end
     end
 
+    # refreshes the access token if it's deemed invalid
+    #
+    # @params refreshToken [String] the refresh token
+    # @params channelSecret [String] the channel secret
+    # @params channel_access_toke [String] the channel access token
+    #
     def refresh_access_token(refreshToken, channelSecret, channel_access_token)
       url = "https://api.line.me/v1/oauth/accessToken?refreshToken=#{refreshToken}&channelSecret=#{channelSecret}"
       channel_access_token = channel_access_token
