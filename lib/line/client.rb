@@ -45,10 +45,10 @@ module Line
     # @param text [Hash] - contains the content of the message to be sent
     # @return [Boolean] if message was sent successfully
     #
-    def send_message to, msg_type, toType, text
+    def send_message channel_access_token, to, msg_type, toType, text
       url = 'https://api.line.me/v1/events'
       request = case msg_type
-      when 'text'
+      when 'Text'
         { "to" => [to],
           "toChannel" => "1383378250",
           "eventType" => "138311608800106203",
