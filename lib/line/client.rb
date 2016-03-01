@@ -3,6 +3,11 @@ require 'byebug'
 
 module Line
   class Client
+    #checks to see if the token is valid
+    #
+    # @params access_token [String] the access_token
+    # [Boolean] true/false if valid or not
+    #
     def valid_access_token?(access_token)
       url = 'https://api.line.me/v1/oauth/verify'
       response = get_request(url, access_token)
@@ -12,6 +17,17 @@ module Line
         return false
       else
         raise 'Something weird is going on here'
+      end
+    end
+
+    def refresh_access_token(refreshToken, channelSecret, channel_access_token)
+      url = "https://api.line.me/v1/oauth/accessToken?refreshToken=#{refreshToken}&channelSecret=#{channelSecret}"
+      channel_access_token = channel_access_token
+      response = send url, channel_access_token
+      if response.has_key?('accessToken') && valid_access_token?(response['accessToken'])
+        return response
+      else
+        raise 'Invalid access token'
       end
     end
 
@@ -27,7 +43,7 @@ module Line
       url = 'https://api.line.me/v1/events'
       request = case msg_type
       when 'text'
-        { to => [to],
+        { "to" => [to],
           "toChannel" => "1383378250",
           "eventType" => "138311608800106203",
           "content" => {
@@ -37,7 +53,7 @@ module Line
           }
         }.to_json
       end
-      send request
+      send url, channel_access_token, request
     end
 
     private
@@ -51,7 +67,7 @@ module Line
         return JSON.parse response.body
       end
 
-      def send url, request, channel_access_token
+      def send url, channel_access_token, request={}
         response = HTTParty.post(url,
           body: request,
           :debug_output => $stdout,
@@ -60,11 +76,7 @@ module Line
             "X-LINE-ChannelToken" => channel_access_token
           }
         )
-        if response == 200
-          return response
-        else
-          raise "Error: Line Message not sent!"
-        end
+        return JSON.parse response
       end
 
   end
