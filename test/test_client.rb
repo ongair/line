@@ -43,7 +43,7 @@ class ClientTest < Test::Unit::TestCase
 
   end
 
-  def test_does_not_get_refresh_access_token_with_valid_params
+  def test_does_not_get_refresh_access_token_with_invalid_params
     stub_request(:post, "https://api.line.me/v1/oauth/accessToken?channelSecret=channelSecret&refreshToken=badRefreshToken").
       with(:headers => {'Content-Type'=>'application/json; charset=utf-8', 'X-Line-Channeltoken'=>'channel_access_token'}).
       to_return(:status => 200, :body => {

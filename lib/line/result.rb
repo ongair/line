@@ -31,22 +31,20 @@ module Line
     # Line Business Connect sends the following parameters in the content hash
     # See https://developers.line.me/businessconnect/api-reference#receiving_messages for definitions
     #
-    # @params eventType [String] 138311609000106303- Received message (text, images, etc.) 138311609100106403 - Received operation (added as friend, etc.)
     # @param content [Hash] the contents of the message
 
     def self.from_hash(hash)
-      if hash['eventType'] == '138311609000106303'
-        content = hash['content']
-        result = nil
+      content = hash['content']
+      result = nil
 
-        if content['contentType'].to_i == TEXT_MESSAGE
-          result = Text.new(content['from'], content['id'], content['text'])
-        elsif content['contentType'].to_i == IMAGE_MESSAGE
-          result = Image.new(content['from'], content['id'], content['originalContentUrl'], content['previewImageUrl'])
-        end
-        result
+      if content['contentType'].to_i == TEXT_MESSAGE
+        result = Text.new(content['from'], content['id'], content['text'])
+      elsif content['contentType'].to_i == IMAGE_MESSAGE
+        result = Image.new(content['from'], content['id'], content['originalContentUrl'], content['previewImageUrl'])
       end
+      result
     end
+  end
   end
 
   class Text < Result
