@@ -1,7 +1,6 @@
 require 'test/unit'
 require 'line'
 require 'webmock/minitest'
-require 'pry-byebug'
 
 class ClientTest < Test::Unit::TestCase
   def test_can_check_if_access_token_is_valid
