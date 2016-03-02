@@ -45,7 +45,6 @@ module Line
       result
     end
   end
-  end
 
   class Text < Result
 
