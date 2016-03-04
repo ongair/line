@@ -1,5 +1,7 @@
+require 'pry-byebug'
 module Line
   class Result
+
 
     #constants are always defined at the top of the class
     TEXT_MESSAGE = 1
@@ -36,11 +38,12 @@ module Line
     def self.from_hash(hash)
       content = hash['content']
       result = nil
-
-      if content['contentType'].to_i == TEXT_MESSAGE
-        result = Text.new(content['from'], content['id'], content['text'])
-      elsif content['contentType'].to_i == IMAGE_MESSAGE
-        result = Image.new(content['from'], content['id'], content['originalContentUrl'], content['previewImageUrl'])
+      if hash['eventType'] == "138311609000106303"
+        if content['contentType'].to_i == TEXT_MESSAGE
+          result = Text.new(content['from'], content['id'], content['text'])
+        elsif content['contentType'].to_i == IMAGE_MESSAGE
+          result = Image.new(content['from'], content['id'], content['originalContentUrl'], content['previewImageUrl'])
+        end
       end
       result
     end
