@@ -81,7 +81,7 @@ module Line
             "X-LINE-ChannelToken" => channel_access_token
           }
         )
-        return JSON.parse response
+        return JSON.parse response.body
       end
 
   end
