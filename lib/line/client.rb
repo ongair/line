@@ -54,7 +54,7 @@ module Line
           "content" => {
             "contentType" => Line::Result::MESSAGE_TYPE.key(msg_type),
             "toType" => toType,
-            "text" => text
+            "text" => "Hello, Yoichiro!"
           }
         }.to_json
       end
@@ -73,8 +73,7 @@ module Line
       end
 
       def send url, channel_access_token, request={}
-        #TODO: catch errors
-        HTTParty.post(url,
+        response = HTTParty.post(url,
           body: request,
           :debug_output => $stdout,
           :headers => {
@@ -82,6 +81,7 @@ module Line
             "X-LINE-ChannelToken" => channel_access_token
           }
         )
+        return JSON.parse response.body
       end
 
   end
