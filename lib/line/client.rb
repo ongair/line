@@ -54,7 +54,7 @@ module Line
           "content" => {
             "contentType" => Line::Result::MESSAGE_TYPE.key(msg_type),
             "toType" => toType,
-            "text" => "Hello, Yoichiro!"
+            "text" => text
           }
         }.to_json
       end
