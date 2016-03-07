@@ -59,15 +59,13 @@ class ClientTest < Test::Unit::TestCase
   end
 
   def test_can_send_a_message
-
-
     stub_request(:post, "https://api.line.me/v1/events").
       with(:body => "{\"to\":[\"userID\"],\"toChannel\":\"1383378250\",\"eventType\":\"138311608800106203\",\"content\":{\"contentType\":1,\"toType\":1,\"text\":\"Hello, Yoichiro!\"}}",
            :headers => {'Content-Type'=>'application/json; charset=utf-8', 'X-Line-Channeltoken'=>'channel_access_token'}).
       to_return(:status => 200, :body => {"failed"=>[],"messageId"=>"1456847120183","timestamp"=>1456847120183,"version"=>1}.to_json, :headers => {})
 
     client = Line::Client.new
-    response = client.send_message 'channel_access_token','userID', 'Text', 1, 'this is a test message'
+    response = client.send_message 'channel_access_token','userID', 'Text', 1, 'Hello, Yoichiro!'
 
     assert response['failed'].empty?
   end

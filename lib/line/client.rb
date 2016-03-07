@@ -52,7 +52,7 @@ module Line
           "toChannel" => "1383378250",
           "eventType" => "138311608800106203",
           "content" => {
-            "contentType" => Line::Result::MESSAGE_TYPE.key(msg_type),
+            "contentType" => Line::Message::MESSAGE_TYPE.key(msg_type),
             "toType" => toType,
             "text" => text
           }
