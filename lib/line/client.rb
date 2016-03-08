@@ -46,9 +46,7 @@ module Line
     #
     def send_message channel_access_token, to, msg_type, toType, text
       url = 'https://api.line.me/v1/events'
-      request = case msg_type
-      when 'Text'
-        { "to" => [to],
+      request = { "to" => [to],
           "toChannel" => "1383378250",
           "eventType" => "138311608800106203",
           "content" => {
@@ -57,7 +55,26 @@ module Line
             "text" => text
           }
         }.to_json
-      end
+
+      send url, channel_access_token, request
+    end
+
+    def send_media channel_access_token, to, msg_type, toType, preview_url, content_url, audio_length=nil
+      url = 'https://api.line.me/v1/events'
+      request = { "to" => [to],
+          "toChannel" => "1383378250",
+          "eventType" => "138311608800106203",
+          "content" => {
+            "contentType" => Line::Message::MESSAGE_TYPE.key(msg_type),
+            "toType" => toType,
+            "previewImageUrl" => preview_url,
+            "originalContentUrl" => content_url,
+            "contentMetada"=>{
+              "AUDLEN" => audio_length
+            }
+          }
+        }.to_json
+
       send url, channel_access_token, request
     end
 

@@ -69,4 +69,17 @@ class ClientTest < Test::Unit::TestCase
 
     assert response['failed'].empty?
   end
+
+  def test_can_send_media
+    stub_request(:post, "https://api.line.me/v1/events").
+      with(:body => "{\"to\":[\"userID\"],\"toChannel\":\"1383378250\",\"eventType\":\"138311608800106203\",\"content\":{\"contentType\":2,\"toType\":1,\"previewImageUrl\":\"http://example.com/preview.jpg\",\"originalContentUrl\":\"http://example.com/original.jpg\",\"contentMetada\":{\"AUDLEN\":null}}}",
+           :headers => {'Content-Type'=>'application/json; charset=utf-8', 'X-Line-Channeltoken'=>'channel_access_token'}).
+      to_return(:status => 200, :body => {"failed"=>[],"messageId"=>"1456847120183","timestamp"=>1456847120183,"version"=>1}.to_json, :headers => {})
+
+
+    client = Line::Client.new
+    response = client.send_media 'channel_access_token','userID', 'Image', 1, "http://example.com/preview.jpg", "http://example.com/original.jpg"
+
+    assert response['failed'].empty?
+  end
 end
