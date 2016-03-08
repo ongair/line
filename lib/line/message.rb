@@ -17,6 +17,18 @@ module Line
       @contentType = MESSAGE_TYPE[contentType]
       @id = id
     end
+
+    def is_text?
+      self.is_a?(Line::Text)
+    end
+
+    def is_media?
+      self.is_a?(Line::Image)
+    end
+
+    def is_location?
+      contentType == 'Location'
+    end
   end
 
   class Text < Message
