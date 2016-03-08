@@ -66,5 +66,7 @@ class MessageTest < Test::Unit::TestCase
     assert_equal 'ue303310d67722553bbb6c476a6ffaedd', message.from
     assert_equal '3976766182080', message.id
     assert_equal 'Image', message.contentType
+    assert_not_nil message.preview_url
+    assert_not_nil message.url
   end
 end
