@@ -36,11 +36,7 @@ module Line
 
     def initialize(id, from, text)
       super(Result::TEXT_MESSAGE, id, from)
-      @text = if text.blank?
-        '*A stciker was sent. You do not have the ability to view stickers*'
-      else
-        text
-      end
+      @text = text
     end
   end
 

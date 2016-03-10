@@ -21,6 +21,8 @@ module Line
           message = Text.new(content['id'], content['from'], content['text'])
         elsif content['contentType'].to_i == IMAGE_MESSAGE
           message = Image.new(content['id'], content['from'])
+        elsif content['contentType'].to_i == STICKER_MESSAGE
+          message = Text.new(content['id'], content['from'], '* A Sticker has been send which cannot be viewed on this platform *')
         end
       end
       message
